@@ -6,6 +6,7 @@ scala_library(
         "//othermodule",
         "@beautiful-scala",
         "@joda-time",
+        "@scala-js",
         "@scalaz"
     ],
     visibility = ["//:__pkg__"]
