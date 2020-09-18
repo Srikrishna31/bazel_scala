@@ -45,6 +45,63 @@ def load_<dependency_name>():
 - Build and check that the dependency is being downloaded, without any errors.
 
 # Folder tree
+│   .gitignore
+│   BUILD
+│   README.md
+│   WORKSPACE
+│
+├───bazeltest
+│   │   BUILD
+│   │
+│   └───src
+│       ├───main
+│       │   └───scala
+│       │       └───bazeltest
+│       │               Main.scala
+│       │
+│       └───test
+│           └───scala
+│               └───bazeltest
+│                       MainSpec.scala
+│
+├───othermodule
+│   │   BUILD
+│   │
+│   └───src
+│       ├───main
+│       │   └───scala
+│       │       └───othermodule
+│       │               Worker.scala
+│       │
+│       └───test
+│           └───scala
+│               └───othermodule
+│                       WorkerSpec.scala
+│
+├───third_party
+│   │   BUILD
+│   │   dependencies.bzl
+│   │
+│   ├───beautiful_scala
+│   │       beautiful_scala.bzl
+│   │       BUILD
+│   │
+│   ├───joda_time
+│   │       BUILD
+│   │       joda_time.bzl
+│   │
+│   ├───scalaz
+│   │       BUILD
+│   │       scalaz.bzl
+│   │
+│   └───scala_js
+│           BUILD
+│           scala_js.bzl
+│
+└───tools
+    └───build_rules
+            BUILD
+            prelude_bazel
 
 # Compiling, testing and running
 All the commands below assume the project root directory as the current directory.
