@@ -4,7 +4,8 @@ scala_library(
     srcs = ["src/main/scala/bazeltest/Main.scala"],
     deps = [
         "//othermodule",
-        "@joda-time"
+        "@joda-time",
+        "@scalaz"
     ],
     visibility = ["//:__pkg__"]
 )
