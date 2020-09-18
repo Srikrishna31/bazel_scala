@@ -15,11 +15,10 @@ Navigate to maven repo for each, goto appropriate version, and download the jar,
 paste it in the scala_repositories method.
 Note: if the rules_scala doesn't have the scala compiler version, it will create an error in the build.
 
-#Steps for adding a new third party dependency
-We will take the example of adding "joda-time" dependency, and then outline the steps:
-- Navigate to third_party folder and create a new folder with name "joda-time"(make sure the name is consistent)
-- Add files "BUILD", "joda_time.bzl" into the foldee. Note that the name for .bzl file is the same as the folder name(and dependency name).
-- Add the following code in the "joda-time.bzl" file, replace the "dependency_name" with "joda_time":
+# Steps for adding a new third party dependency
+- Navigate to third_party folder and create a new folder with name <dependency_name>(make sure the name is consistent)
+- Add files "BUILD", "<dependency_name>.bzl" into the foldee. Note that the name for .bzl file is the same as the folder name(and dependency name).
+- Add the following code in the "<dependency_name>.bzl" file, replace the "<dependency_name>" with the third party library/dependency name:
 ```
 load("@bazel_tools//tools/build_defs/repo:java.bzl", "java_import_external")
 
@@ -32,8 +31,41 @@ def load_<dependency_name>():
                 "<appropriate url here>",
             ],
 ```
+- Replace the <dependency_name> with the actual third party library name in the above code.
 - Next, in the dependencies.bzl file:
-    - Add the line: load("//third_party/<dependency_name>:<dependency_name.bzl>", "load_<dependency_name>")
-    - At the end of the file, add: "load_<dependency_name>()"
-- Add this dependency_name as a dependency to the App target
+    - Add the line:
+    ```
+    load("//third_party/<dependency_name>:<dependency_name.bzl>", "load_<dependency_name>")
+    ```
+    - At the end of the file, add:
+    ```
+    load_<dependency_name>()
+    ```
+- Add this <dependency_name> as a dependency to the App target
 - Build and check that the dependency is being downloaded, without any errors.
+
+# Folder tree
+
+# Compiling, testing and running
+All the commands below assume the project root directory as the current directory.
+1. To compile the entire application use:
+```
+bazel build App
+```
+2. To run the tests use:
+```
+bazel test test-app
+```
+3. To run the app itself, use:
+```
+bazel run App
+```
+4. To package the application, run the following:
+```
+bazel build package-app
+```
+This will build the app_deploy.jar file that contains all the dependencies bundled together, that is ready for deployment.
+It can be run as follows:
+```
+java -jar <path-to-jar>/App_deploy.jar
+```
