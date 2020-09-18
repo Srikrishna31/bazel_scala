@@ -4,6 +4,7 @@ scala_library(
     srcs = ["src/main/scala/bazeltest/Main.scala"],
     deps = [
         "//othermodule",
+        "@beautiful-scala",
         "@joda-time",
         "@scalaz"
     ],
